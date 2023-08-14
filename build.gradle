@@ -1,0 +1,73 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+
+}
+
+group = 'io.github.cruciblemc'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    maven {
+        name = "codemc"
+        url = "https://repo.codemc.org/repository/maven-public/"
+    }
+
+}
+
+
+dependencies {
+
+    annotationProcessor 'com.github.bsideup.jabel:jabel-javac-plugin:0.4.2'
+    compileOnly 'com.github.bsideup.jabel:jabel-javac-plugin:0.4.2'
+
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+
+    compileOnly "org.spigotmc:spigot-api:1.12.2-R0.1-SNAPSHOT"
+
+    implementation "de.tr7zw:item-nbt-api:2.11.3"
+
+}
+
+configure([tasks.compileJava]) {
+    sourceCompatibility = 16 // for the IDE support
+    options.release = 8
+    options.encoding = 'UTF-8'
+
+    javaCompiler = javaToolchains.compilerFor {
+        languageVersion = JavaLanguageVersion.of(16)
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+shadowJar {
+    relocate("de.tr7zw.changeme.nbtapi", "io.github.cruciblemc.vitatempus.libs.de.tr7zw.changeme.nbtapi")
+    archiveClassifier.set('')
+}
+
+build {
+    dependsOn(shadowJar)
+}

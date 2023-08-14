@@ -1,0 +1,4 @@
+name: VitaTempus
+version: '${version}'
+main: io.github.cruciblemc.vitatempus.VitaTempus
+author: brunoxkk0
