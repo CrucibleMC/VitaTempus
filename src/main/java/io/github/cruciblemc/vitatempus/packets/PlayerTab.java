@@ -1,7 +1,6 @@
 package io.github.cruciblemc.vitatempus.packets;
 
 import de.tr7zw.changeme.nbtapi.NBT;
-import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import io.github.cruciblemc.vitatempus.core.MessagePacket;
 
