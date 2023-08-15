@@ -30,7 +30,6 @@ public class PlayerTab extends MessagePacket {
         ReadWriteNBT nbtCompound = NBT.createNBTObject();
 
         nbtCompound.setString("packetType", "set");
-        nbtCompound.getCompoundList("cellList");
 
         if(header != null)
             nbtCompound.setString("header", header);

@@ -18,7 +18,7 @@ public class Teste4 {
 
             @Override
             public void run() {
-                PlayerTab playerTab = PlayerTab.of("Header", "Footer");
+                PlayerTab playerTab = PlayerTab.of("Header " + System.currentTimeMillis(), "Footer " + System.currentTimeMillis());
                 packetDeliver.broadcast(playerTab);
             }
 
