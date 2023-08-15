@@ -26,7 +26,7 @@ public class ActionBar extends MessagePacket {
         return new ActionBar(time, message);
     }
 
-    public static ActionBar remove(){
+    public MessagePacket remove(){
         return new RemoveActionBar();
     }
 

@@ -1,6 +1,7 @@
 package io.github.cruciblemc.vitatempus.teste;
 
 import io.github.cruciblemc.vitatempus.core.BukkitPacketDeliver;
+import io.github.cruciblemc.vitatempus.core.MessagePacket;
 import io.github.cruciblemc.vitatempus.packets.ActionBar;
 import io.github.cruciblemc.vitatempus.packets.Title;
 import org.bukkit.plugin.Plugin;
@@ -11,7 +12,6 @@ public class Teste2 {
     public static void onInit(Plugin plugin, BukkitPacketDeliver packetDeliver){
 
         ActionBar actionBar = ActionBar.of("Olá senhor");
-        ActionBar remove = ActionBar.remove();
 
         new BukkitRunnable(){
 
@@ -22,7 +22,7 @@ public class Teste2 {
                 new BukkitRunnable(){
                     @Override
                     public void run() {
-                        packetDeliver.broadcast(remove);
+                        packetDeliver.broadcast(actionBar.remove());
                     }
                 }.runTaskLater(plugin, 50);
 
