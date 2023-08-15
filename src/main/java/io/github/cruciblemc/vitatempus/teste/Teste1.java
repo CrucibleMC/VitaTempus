@@ -16,6 +16,14 @@ public class Teste1 {
             @Override
             public void run() {
                 packetDeliver.broadcast(title);
+
+                new BukkitRunnable(){
+                    @Override
+                    public void run() {
+                        packetDeliver.broadcast(title.remove());
+                    }
+                }.runTaskLater(plugin, 30);
+
             }
 
         }.runTaskTimer(plugin, 0,200);

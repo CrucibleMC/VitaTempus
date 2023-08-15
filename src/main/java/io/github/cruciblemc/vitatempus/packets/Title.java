@@ -38,7 +38,6 @@ public class Title extends MessagePacket {
 
     }
 
-
     public static Title of(String ... messages){
         return new Title(messages);
     }
@@ -47,6 +46,9 @@ public class Title extends MessagePacket {
         return new Title(fadeIn, stay, fadeOut, messages);
     }
 
+    public MessagePacket remove(){
+        return new RemoveTitle();
+    }
 
     @Override
     public byte packetID() {
@@ -58,7 +60,7 @@ public class Title extends MessagePacket {
 
         ReadWriteNBT nbtCompound = NBT.createNBTObject();
 
-        nbtCompound.setString("packetType", "set");
+        nbtCompound.setString("packetType", getPacketType());
 
         nbtCompound.setInteger("fadeIn", fadeIn);
         nbtCompound.setInteger("stay", stay);
@@ -78,4 +80,18 @@ public class Title extends MessagePacket {
 
         return nbtCompound;
     }
+
+    public static class RemoveTitle extends Title{
+
+        public RemoveTitle(){
+            super("VITA","TEMPUS");
+        }
+
+        @Override
+        public String getPacketType() {
+            return "remove";
+        }
+
+    }
+
 }
