@@ -22,9 +22,17 @@ public class Teste3 {
             public void run() {
                 BossBar bossBar = BossBar.of("BossBar Testando", BossBarType.NOTCHED_20, BossBarColor.BLUE, (float) Math.random(), true, uuid);
                 packetDeliver.broadcast(bossBar);
+
+                new BukkitRunnable(){
+                    @Override
+                    public void run() {
+                        packetDeliver.broadcast(bossBar.remove());
+                    }
+                }.runTaskLater(plugin, 50);
+
             }
 
-        }.runTaskTimer(plugin, 0,40);
+        }.runTaskTimer(plugin, 0,200);
     }
 
 }

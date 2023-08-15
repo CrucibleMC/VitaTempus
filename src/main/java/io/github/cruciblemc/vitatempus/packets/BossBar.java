@@ -19,7 +19,8 @@ public class BossBar extends MessagePacket {
     private float percentage;
     private boolean visible;
 
-    private final String uuid;
+    @Getter
+    private final UUID uuid;
 
     @Override
     public byte packetID() {
@@ -39,7 +40,7 @@ public class BossBar extends MessagePacket {
 
         this.percentage = percentage;
         this.visible = visible;
-        this.uuid = uuid.toString();
+        this.uuid = uuid;
 
     }
 
@@ -55,21 +56,38 @@ public class BossBar extends MessagePacket {
         return new BossBar(text, type, color, percentage, visible, uuid);
     }
 
+    public MessagePacket remove(){
+        return new RemoveBossBar(uuid);
+    }
+
+
     @Override
     public ReadWriteNBT writeCompound() {
 
         ReadWriteNBT nbtCompound = NBT.createNBTObject();
 
-        nbtCompound.setString("packetType", "set");
+        nbtCompound.setString("packetType", getPacketType());
 
         nbtCompound.setString("text", text);
         nbtCompound.setString("type", type);
         nbtCompound.setFloat("percentage", percentage);
         nbtCompound.setBoolean("isVisible", visible);
-        nbtCompound.setString("uuid", uuid);
+        nbtCompound.setString("uuid", uuid.toString());
         nbtCompound.setString("color", color);
 
         return nbtCompound;
+    }
+
+    public static class RemoveBossBar extends BossBar{
+
+        private RemoveBossBar(UUID uuid) {
+            super("VITATEMPUS", BossBarType.FLAT, BossBarColor.PINK, 1F, true, uuid);
+        }
+
+        @Override
+        public String getPacketType() {
+            return "remove";
+        }
     }
 
 }
