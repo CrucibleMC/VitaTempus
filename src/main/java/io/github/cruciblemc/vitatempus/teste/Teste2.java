@@ -11,12 +11,21 @@ public class Teste2 {
     public static void onInit(Plugin plugin, BukkitPacketDeliver packetDeliver){
 
         ActionBar actionBar = ActionBar.of("Olá senhor");
+        ActionBar remove = ActionBar.remove();
 
         new BukkitRunnable(){
 
             @Override
             public void run() {
                 packetDeliver.broadcast(actionBar);
+
+                new BukkitRunnable(){
+                    @Override
+                    public void run() {
+                        packetDeliver.broadcast(remove);
+                    }
+                }.runTaskLater(plugin, 50);
+
             }
 
         }.runTaskTimer(plugin, 0,200);

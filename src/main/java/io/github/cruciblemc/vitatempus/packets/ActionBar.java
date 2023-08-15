@@ -26,6 +26,10 @@ public class ActionBar extends MessagePacket {
         return new ActionBar(time, message);
     }
 
+    public static ActionBar remove(){
+        return new RemoveActionBar();
+    }
+
     @Override
     public byte packetID() {
         return 3;
@@ -36,11 +40,25 @@ public class ActionBar extends MessagePacket {
 
         ReadWriteNBT nbtCompound = NBT.createNBTObject();
 
-        nbtCompound.setString("packetType", "set");
+        nbtCompound.setString("packetType", getPacketType());
 
         nbtCompound.setInteger("time", time);
         nbtCompound.setString("text", message);
 
         return nbtCompound;
     }
+
+    public static class RemoveActionBar extends ActionBar{
+
+        private RemoveActionBar() {
+            super("VITATEMPUS");
+        }
+
+        @Override
+        public String getPacketType() {
+            return "remove";
+        }
+
+    }
+
 }
