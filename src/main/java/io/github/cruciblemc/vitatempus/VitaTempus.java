@@ -5,6 +5,7 @@ import io.github.cruciblemc.vitatempus.packets.Title;
 import io.github.cruciblemc.vitatempus.teste.Teste1;
 import io.github.cruciblemc.vitatempus.teste.Teste2;
 import io.github.cruciblemc.vitatempus.teste.Teste3;
+import io.github.cruciblemc.vitatempus.teste.Teste4;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,6 +36,7 @@ public final class VitaTempus extends JavaPlugin {
         Teste1.onInit(this, bukkitPacketDeliver);
         Teste2.onInit(this, bukkitPacketDeliver);
         Teste3.onInit(this, bukkitPacketDeliver);
+        Teste4.onInit(this, bukkitPacketDeliver);
 
     }
 
