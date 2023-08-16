@@ -53,7 +53,7 @@ public class BukkitPacketDeliver {
     }
 
     public void onDisable(){
-        Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(plugin, channel);
+        Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(plugin, channel);
     }
 
 
