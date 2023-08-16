@@ -32,7 +32,7 @@ public class ActionBar extends MessagePacket {
 
     @Override
     public byte packetID() {
-        return 3;
+        return 4;
     }
 
     @Override

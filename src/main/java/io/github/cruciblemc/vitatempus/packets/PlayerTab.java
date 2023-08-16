@@ -20,7 +20,7 @@ public class PlayerTab extends MessagePacket {
 
     @Override
     public byte packetID() {
-        return 1;
+        return 2;
     }
 
     @Override

@@ -52,7 +52,7 @@ public class Title extends MessagePacket {
 
     @Override
     public byte packetID() {
-        return 2;
+        return 3;
     }
 
     @Override

@@ -24,7 +24,7 @@ public class BossBar extends MessagePacket {
 
     @Override
     public byte packetID() {
-        return 0;
+        return 1;
     }
 
     private BossBar(String text, BossBarType type, BossBarColor color, float percentage, boolean visible, UUID uuid){
