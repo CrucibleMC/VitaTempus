@@ -1,9 +1,13 @@
 package io.github.cruciblemc.vitatempus.necrotempus;
 
 import de.tr7zw.changeme.nbtapi.NBTContainer;
+import io.github.cruciblemc.vitatempus.VitaTempus;
 import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 
@@ -13,7 +17,7 @@ import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class NecroTempus implements PluginMessageListener {
+public class NecroTempus implements PluginMessageListener, Listener {
 
     private static NecroTempus instance;
 
@@ -21,7 +25,9 @@ public class NecroTempus implements PluginMessageListener {
         return instance != null ? instance : (instance = new NecroTempus());
     }
 
-    private NecroTempus(){}
+    private NecroTempus(){
+        Bukkit.getPluginManager().registerEvents(this, VitaTempus.getInstance());
+    }
 
     private static final ConcurrentHashMap<UUID, String> versions = new ConcurrentHashMap<>();
 
@@ -46,7 +52,7 @@ public class NecroTempus implements PluginMessageListener {
 
         if(nbtContainer.hasTag("version")){
             String version = nbtContainer.getString("version");
-            versions.put(player.getUniqueId(), version);
+            versions.put(player.getUniqueId(), version.substring(0, Math.min(64, version.length() - 1)));
         }
 
     }
@@ -57,6 +63,11 @@ public class NecroTempus implements PluginMessageListener {
 
     public void onDisable(Plugin plugin, String channel){
         Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(plugin, channel, this);
+    }
+
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event){
+        versions.remove(event.getPlayer().getUniqueId());
     }
 
 }
